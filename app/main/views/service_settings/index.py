@@ -116,6 +116,7 @@ def service_name_change(service_id):
                     raise http_error
 
                 form.name.errors.append(error_message)
+                form.error_summary.append(error_message)
 
         else:
             return redirect(url_for(".service_settings", service_id=service_id))
