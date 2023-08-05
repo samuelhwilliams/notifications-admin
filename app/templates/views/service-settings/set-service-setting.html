@@ -2,6 +2,7 @@
 {% from "components/page-footer.html" import page_footer %}
 {% from "components/form.html" import form_wrapper %}
 {% from "govuk_frontend_jinja/components/back-link/macro.html" import govukBackLink %}
+{% from "govuk_frontend_jinja/components/error-summary/macro.html" import govukErrorSummary %}
 
 {% block service_page_title %}
   {{ title }}
@@ -15,6 +16,12 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-five-sixths">
+      {% if form.error_summary %}
+        {{ govukErrorSummary({
+          "titleText": "There is a problem",
+          "errorList": form.error_summary
+        }) }}
+      {% endif %}
       {% call form_wrapper() %}
         {{ form.enabled(param_extensions={
           "fieldset": {
